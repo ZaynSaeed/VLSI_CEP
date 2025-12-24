@@ -1,0 +1,409 @@
+6. Printing statistics.
+
+=== WB$pipeline_proc_chip.i_pipeline_proc.WB ===
+
+   Number of wires:                 12
+   Number of wire bits:             16
+   Number of public wires:           6
+   Number of public wire bits:       8
+   Number of ports:                  6
+   Number of port bits:              8
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $dff                            2
+     $mux                            2
+
+=== M$pipeline_proc_chip.i_pipeline_proc.M ===
+
+   Number of wires:                 12
+   Number of wire bits:             12
+   Number of public wires:           6
+   Number of public wire bits:       6
+   Number of ports:                  6
+   Number of port bits:              6
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $dff                            2
+     $mux                            2
+
+=== AND_gate$pipeline_proc_chip.i_pipeline_proc.nd_gate ===
+
+   Number of wires:                  8
+   Number of wire bits:              8
+   Number of public wires:           6
+   Number of public wire bits:       6
+   Number of ports:                  5
+   Number of port bits:              5
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     $and                            1
+     $or                             1
+
+=== ALU_ctrl$pipeline_proc_chip.i_pipeline_proc.ALU_ctl ===
+
+   Number of wires:                112
+   Number of wire bits:            256
+   Number of public wires:           4
+   Number of public wire bits:      16
+   Number of ports:                  4
+   Number of port bits:             16
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 58
+     $eq                             5
+     $logic_and                     10
+     $logic_not                      7
+     $mux                           36
+
+=== ctrl$pipeline_proc_chip.i_pipeline_proc.control ===
+
+   Number of wires:                512
+   Number of wire bits:            590
+   Number of public wires:           9
+   Number of public wire bits:      17
+   Number of ports:                  9
+   Number of port bits:             17
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                227
+     $eq                             7
+     $mux                          220
+
+=== mux3x1$pipeline_proc_chip.i_pipeline_proc.mux2 ===
+
+   Number of wires:                  9
+   Number of wire bits:            196
+   Number of public wires:           5
+   Number of public wire bits:     130
+   Number of ports:                  5
+   Number of port bits:            130
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  3
+     $eq                             1
+     $logic_not                      1
+     $pmux                           1
+
+=== DMEM$pipeline_proc_chip.i_pipeline_proc.dmem ===
+
+   Number of wires:                 49
+   Number of wire bits:         262663
+   Number of public wires:          12
+   Number of public wire bits:   32884
+   Number of ports:                 11
+   Number of port bits:            116
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1051
+     $bmux                           1
+     $bwmux                          1
+     $demux                          1
+     $dff                         1024
+     $ge                             4
+     $logic_and                      5
+     $lt                             3
+     $mux                            8
+     $not                            2
+     $sub                            2
+
+=== EX_MEM$pipeline_proc_chip.i_pipeline_proc.EX_MEM ===
+
+   Number of wires:                 22
+   Number of wire bits:            518
+   Number of public wires:          10
+   Number of public wire bits:     258
+   Number of ports:                 10
+   Number of port bits:            258
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  8
+     $dff                            4
+     $mux                            4
+
+=== adder2$pipeline_proc_chip.i_pipeline_proc.b_adder ===
+
+   Number of wires:                  4
+   Number of wire bits:            128
+   Number of public wires:           3
+   Number of public wire bits:      96
+   Number of ports:                  3
+   Number of port bits:             96
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     $add                            1
+
+=== ALU$pipeline_proc_chip.i_pipeline_proc.alu ===
+
+   Number of wires:                 25
+   Number of wire bits:            338
+   Number of public wires:           6
+   Number of public wire bits:     102
+   Number of ports:                  6
+   Number of port bits:            102
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 15
+     $add                            1
+     $and                            2
+     $eq                             6
+     $logic_not                      1
+     $mux                            1
+     $or                             1
+     $pmux                           1
+     $shl                            1
+     $sub                            1
+
+=== mux$pipeline_proc_chip.i_pipeline_proc.mux1 ===
+
+   Number of wires:                  7
+   Number of wire bits:            162
+   Number of public wires:           4
+   Number of public wire bits:      97
+   Number of ports:                  4
+   Number of port bits:             97
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     $mux                            1
+
+=== imm_gen$pipeline_proc_chip.i_pipeline_proc.Imm_gen ===
+
+   Number of wires:                 44
+   Number of wire bits:            726
+   Number of public wires:           2
+   Number of public wire bits:      64
+   Number of ports:                  2
+   Number of port bits:             64
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 22
+     $eq                             6
+     $logic_or                       1
+     $mux                           15
+
+=== regfile$pipeline_proc_chip.i_pipeline_proc.Regfile ===
+
+   Number of wires:                 43
+   Number of wire bits:          13600
+   Number of public wires:          10
+   Number of public wire bits:    1138
+   Number of ports:                  9
+   Number of port bits:            114
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 54
+     $bmux                           2
+     $bwmux                          1
+     $demux                          2
+     $dff                           32
+     $ge                             1
+     $logic_and                      1
+     $lt                             3
+     $mux                           11
+     $reduce_bool                    1
+
+=== IF_ID$pipeline_proc_chip.i_pipeline_proc.IF_ID ===
+
+   Number of wires:                 19
+   Number of wire bits:            391
+   Number of public wires:           9
+   Number of public wire bits:     195
+   Number of ports:                  9
+   Number of port bits:            195
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  7
+     $dff                            3
+     $logic_or                       1
+     $mux                            3
+
+=== mux$pipeline_proc_chip.i_pipeline_proc.mux3 ===
+
+   Number of wires:                  7
+   Number of wire bits:            162
+   Number of public wires:           4
+   Number of public wire bits:      97
+   Number of ports:                  4
+   Number of port bits:             97
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     $mux                            1
+
+=== adder1$pipeline_proc_chip.i_pipeline_proc.pc_adder ===
+
+   Number of wires:                  3
+   Number of wire bits:             96
+   Number of public wires:           2
+   Number of public wire bits:      64
+   Number of ports:                  2
+   Number of port bits:             64
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     $add                            1
+
+=== IMEM$pipeline_proc_chip.i_pipeline_proc.imem ===
+
+   Number of wires:                  7
+   Number of wire bits:          32193
+   Number of public wires:           3
+   Number of public wire bits:   32096
+   Number of ports:                  2
+   Number of port bits:             64
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  4
+     $bmux                           1
+     $div                            1
+     $lt                             1
+     $mux                            1
+
+=== PC$pipeline_proc_chip.i_pipeline_proc.pc ===
+
+   Number of wires:                  7
+   Number of wire bits:            131
+   Number of public wires:           4
+   Number of public wire bits:      66
+   Number of ports:                  4
+   Number of port bits:             66
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     $dff                            1
+     $mux                            1
+
+=== pipeline_proc$pipeline_proc_chip.i_pipeline_proc ===
+
+   Number of wires:                 46
+   Number of wire bits:            653
+   Number of public wires:          42
+   Number of public wire bits:     649
+   Number of ports:                  6
+   Number of port bits:             18
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 19
+     $mux                            1
+     ALU$pipeline_proc_chip.i_pipeline_proc.alu      1
+     ALU_ctrl$pipeline_proc_chip.i_pipeline_proc.ALU_ctl      1
+     AND_gate$pipeline_proc_chip.i_pipeline_proc.nd_gate      1
+     DMEM$pipeline_proc_chip.i_pipeline_proc.dmem      1
+     EX_MEM$pipeline_proc_chip.i_pipeline_proc.EX_MEM      1
+     IF_ID$pipeline_proc_chip.i_pipeline_proc.IF_ID      1
+     IMEM$pipeline_proc_chip.i_pipeline_proc.imem      1
+     M$pipeline_proc_chip.i_pipeline_proc.M      1
+     PC$pipeline_proc_chip.i_pipeline_proc.pc      1
+     WB$pipeline_proc_chip.i_pipeline_proc.WB      1
+     adder1$pipeline_proc_chip.i_pipeline_proc.pc_adder      1
+     adder2$pipeline_proc_chip.i_pipeline_proc.b_adder      1
+     ctrl$pipeline_proc_chip.i_pipeline_proc.control      1
+     imm_gen$pipeline_proc_chip.i_pipeline_proc.Imm_gen      1
+     mux$pipeline_proc_chip.i_pipeline_proc.mux1      1
+     mux$pipeline_proc_chip.i_pipeline_proc.mux3      1
+     mux3x1$pipeline_proc_chip.i_pipeline_proc.mux2      1
+     regfile$pipeline_proc_chip.i_pipeline_proc.Regfile      1
+
+=== pipeline_proc_chip ===
+
+   Number of wires:                 12
+   Number of wire bits:             36
+   Number of public wires:          12
+   Number of public wire bits:      36
+   Number of ports:                  6
+   Number of port bits:             18
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 27
+     pipeline_proc$pipeline_proc_chip.i_pipeline_proc      1
+     sg13g2_IOPadIOVdd               2
+     sg13g2_IOPadIOVss               2
+     sg13g2_IOPadIn                  2
+     sg13g2_IOPadOut16mA            16
+     sg13g2_IOPadVdd                 2
+     sg13g2_IOPadVss                 2
+
+=== design hierarchy ===
+
+   pipeline_proc_chip                1
+     pipeline_proc$pipeline_proc_chip.i_pipeline_proc      1
+       ALU$pipeline_proc_chip.i_pipeline_proc.alu      1
+       ALU_ctrl$pipeline_proc_chip.i_pipeline_proc.ALU_ctl      1
+       AND_gate$pipeline_proc_chip.i_pipeline_proc.nd_gate      1
+       DMEM$pipeline_proc_chip.i_pipeline_proc.dmem      1
+       EX_MEM$pipeline_proc_chip.i_pipeline_proc.EX_MEM      1
+       IF_ID$pipeline_proc_chip.i_pipeline_proc.IF_ID      1
+       IMEM$pipeline_proc_chip.i_pipeline_proc.imem      1
+       M$pipeline_proc_chip.i_pipeline_proc.M      1
+       PC$pipeline_proc_chip.i_pipeline_proc.pc      1
+       WB$pipeline_proc_chip.i_pipeline_proc.WB      1
+       adder1$pipeline_proc_chip.i_pipeline_proc.pc_adder      1
+       adder2$pipeline_proc_chip.i_pipeline_proc.b_adder      1
+       ctrl$pipeline_proc_chip.i_pipeline_proc.control      1
+       imm_gen$pipeline_proc_chip.i_pipeline_proc.Imm_gen      1
+       mux$pipeline_proc_chip.i_pipeline_proc.mux1      1
+       mux$pipeline_proc_chip.i_pipeline_proc.mux3      1
+       mux3x1$pipeline_proc_chip.i_pipeline_proc.mux2      1
+       regfile$pipeline_proc_chip.i_pipeline_proc.Regfile      1
+
+   Number of wires:                960
+   Number of wire bits:         312875
+   Number of public wires:         159
+   Number of public wire bits:   68025
+   Number of ports:                113
+   Number of port bits:           1551
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1492
+     $add                            3
+     $and                            3
+     $bmux                           4
+     $bwmux                          2
+     $demux                          3
+     $dff                         1068
+     $div                            1
+     $eq                            25
+     $ge                             5
+     $logic_and                     16
+     $logic_not                      9
+     $logic_or                       2
+     $lt                             7
+     $mux                          307
+     $not                            2
+     $or                             2
+     $pmux                           2
+     $reduce_bool                    1
+     $shl                            1
+     $sub                            3
+     sg13g2_IOPadIOVdd               2
+     sg13g2_IOPadIOVss               2
+     sg13g2_IOPadIn                  2
+     sg13g2_IOPadOut16mA            16
+     sg13g2_IOPadVdd                 2
+     sg13g2_IOPadVss                 2
+

@@ -1,0 +1,32 @@
+#docker cp threesp.flist iic-osic-tools_shell_uid_0:/foss/designs/CEP
+# ---------------------- TOP LEVEL ----------------------
+cep/pipeline_proc_chip.sv
+
+# ---------------------- PIPELINE PROCESSOR ----------------------
+cep/module_datapath_single.sv
+cep/EX_MEM.sv
+cep/IF_ID.sv
+cep/M.sv
+cep/WB.sv
+
+# ---------------------- FUNCTIONAL UNITS ----------------------
+cep/module_PC.sv
+cep/module_PC_Adder.sv
+cep/module_ALU.sv
+cep/module_ALU_ctrl.sv
+cep/module_AND_gate.sv
+cep/module_branch_adder.sv
+cep/module_mux.sv
+cep/module_mux3x1.sv
+cep/module_reg_file.sv
+cep/module_Imm_Gen.sv
+cep/module_ctrl.sv
+
+# ---------------------- MEMORIES ----------------------
+cep/module_IMEM.sv
+cep/module_DMEM.sv
+
+# ---------------------- UTILITY ----------------------
+cep/clk_delay.sv
+cep/clk_delay_proc.sv
+cep/t_ff.sv
