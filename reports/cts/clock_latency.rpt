@@ -1,0 +1,38 @@
+Clock clk_sys
+rise -> rise
+    min     max
+   0.00    0.00 source latency
+   0.81         network latency _559831_/CLK
+           1.29 network latency _574679_/CLK
+---------------
+   0.81    1.29 latency
+           0.48 skew
+
+rise -> fall
+    min     max
+   0.00    0.00 source latency
+   0.77         network latency _560239_/CLK
+           1.50 network latency _560551_/CLK
+---------------
+   0.77    1.50 latency
+           0.73 skew
+
+fall -> rise
+    min     max
+   0.00    0.00 source latency
+   0.97         network latency _560239_/CLK
+           1.81 network latency _560551_/CLK
+---------------
+   0.97    1.81 latency
+           0.84 skew
+
+fall -> fall
+    min     max
+   0.00    0.00 source latency
+   1.02         network latency _559831_/CLK
+           1.64 network latency _574679_/CLK
+---------------
+   1.02    1.64 latency
+           0.62 skew
+
+

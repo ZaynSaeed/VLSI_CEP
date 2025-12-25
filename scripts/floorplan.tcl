@@ -22,9 +22,10 @@ puts "\n=== Design Linked: pipeline_proc_chip ===\n"
 # Floorplan
 # ---------------------------
 initialize_floorplan \
-    -die_area  "0 0 1760 1760" \
-    -core_area "215 215 1545 1545" \
+    -die_area  "0 0 2800 2800" \
+    -core_area "300 300 2500 2500" \
     -site CoreSite
+
 
 
 
@@ -55,15 +56,15 @@ set_voltage_domain -name CORE -power VDD -ground VSS
 # PDN Grid
 # ---------------------------
 define_pdn_grid -name core_grid -voltage_domains CORE
-
-# ---- Routing Tracks (PDN safe) ----
-make_tracks Metal1    -x_offset 0 -x_pitch 0.4 -y_offset 0 -y_pitch 0.4
-make_tracks Metal2    -x_offset 0 -x_pitch 0.4 -y_offset 0 -y_pitch 0.4
-make_tracks Metal3    -x_offset 0 -x_pitch 0.4 -y_offset 0 -y_pitch 0.4
-make_tracks Metal4    -x_offset 0 -x_pitch 0.4 -y_offset 0 -y_pitch 0.4
-make_tracks Metal5    -x_offset 0 -x_pitch 0.4 -y_offset 0 -y_pitch 0.4
-make_tracks TopMetal1 -x_offset 0 -x_pitch 4.0 -y_offset 0 -y_pitch 4.0
-make_tracks TopMetal2 -x_offset 0 -x_pitch 4.0 -y_offset 0 -y_pitch 4.0
+# ---- Routing Tracks (CORRECTED) ----
+# Change 0.4 -> 0.48 / 0.42 to match the PDK grid
+make_tracks Metal1    -x_offset 0 -x_pitch 0.48 -y_offset 0 -y_pitch 0.48
+make_tracks Metal2    -x_offset 0 -x_pitch 0.42 -y_offset 0 -y_pitch 0.42
+make_tracks Metal3    -x_offset 0 -x_pitch 0.48 -y_offset 0 -y_pitch 0.48
+make_tracks Metal4    -x_offset 0 -x_pitch 0.42 -y_offset 0 -y_pitch 0.42
+make_tracks Metal5    -x_offset 0 -x_pitch 0.48 -y_offset 0 -y_pitch 0.48
+make_tracks TopMetal1 -x_offset 0 -x_pitch 2.28 -y_offset 0 -y_pitch 2.28
+make_tracks TopMetal2 -x_offset 0 -x_pitch 4.00 -y_offset 0 -y_pitch 4.00
 
 # ---------------------------
 # PDN Ring
@@ -119,7 +120,7 @@ create_clock -name clk_sys -period 10 [get_ports clk]
 # ---------------------------
 # Save Checkpoint
 # ---------------------------
-set save_dir "/foss/designs/CEP/openroad/pre_place"
+set save_dir "/foss/designs/CEP/out/floorplan"
 file mkdir $save_dir
 
 write_sdc $save_dir/pipeline_proc_chip.pre_place.sdc

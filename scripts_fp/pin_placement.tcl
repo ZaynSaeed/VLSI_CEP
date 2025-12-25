@@ -1,81 +1,120 @@
-#PIN PLACEMENT 1st one
+############################################################
+# ELASTIC PIN PLACEMENT SCRIPT
+# Automatically adjusts pin locations based on Die Size
+############################################################
 
-#docker cp pin_placement.tcl iic-osic-tools_shell_uid_0:/foss/designs/CEP/scripts_fp
+puts "\n=== Starting Elastic IO Placement ===\n"
 
-puts "\n=== Starting IO / Pad Placement ===\n"
-make_io_sites \
-    -horizontal_site sg13g2_ioSite \
-    -vertical_site   sg13g2_ioSite \
-    -corner_site     sg13g2_ioSite \
-    -offset 0
-set chipW 1760.0
-set chipH 1760.0
+# =========================================================
+# 1. USER CONFIGURATION (CHANGE THIS TO RESIZE CHIP)
+# =========================================================
+# Set this to match your floorplan.tcl Die Area!
+set die_size 2800.0 
 
-# IO row safe limits (DO NOT CHANGE)
-set rowMin 180
-set rowMax 1580
-set left_pads {pad_clk pad_rst}
+# Margins: Keep pins away from the corners (usually 300um is safe)
+set margin   300.0
 
-set n_left [llength $left_pads]
-set pitch_left [expr {($rowMax - $rowMin)/($n_left + 1)}]
+# =========================================================
+# 2. AUTOMATIC CALCULATIONS (DO NOT TOUCH)
+# =========================================================
+set min_pos $margin
+set max_pos [expr {$die_size - $margin}]
+set span    [expr {$max_pos - $min_pos}]
 
-for {set i 0} {$i < $n_left} {incr i} {
-    set y [expr {$rowMin + ($i+1)*$pitch_left}]
-    place_pad -master sg13g2_IOPadIn \
-        -row IO_WEST \
-        -location $y \
-        [lindex $left_pads $i]
-}
+puts "   -> Die Size: $die_size"
+puts "   -> Placement Range: $min_pos to $max_pos"
+puts "   -> Active Span: $span"
 
-set bottom_outputs {}
-for {set i 0} {$i < 16} {incr i} {
-    lappend bottom_outputs pad_out$i
-}
+# Setup Sites
+make_io_sites -horizontal_site sg13g2_ioSite \
+              -vertical_site   sg13g2_ioSite \
+              -corner_site     sg13g2_ioSite \
+              -offset 0
 
-set n_bot [llength $bottom_outputs]
-set pitch_bot [expr {($chipW - 360)/($n_bot + 1)}]
+# =========================================================
+# 3. WEST SIDE (Inputs) - 2 Pins
+# =========================================================
+# Spacing logic: Divide the span by (Pins + 1)
+set w_count 2
+set w_step  [expr {$span / ($w_count + 1)}]
 
-for {set i 0} {$i < $n_bot} {incr i} {
-    set x [expr {180 + ($i+1)*$pitch_bot}]
-    place_pad -master sg13g2_IOPadOut16mA \
-        -row IO_SOUTH \
-        -location $x \
-        [lindex $bottom_outputs $i]
-}
-set right_outputs {}
-for {set i 16} {$i < 32} {incr i} {
-    lappend right_outputs pad_out$i
-}
+# Pin 1
+place_pad -master sg13g2_IOPadIn -row IO_WEST \
+    -location [expr {$min_pos + 1 * $w_step}] \
+    pad_clk
 
-set n_right [llength $right_outputs]
-set pitch_right [expr {($rowMax - $rowMin)/($n_right + 1)}]
+# Pin 2
+place_pad -master sg13g2_IOPadIn -row IO_WEST \
+    -location [expr {$min_pos + 2 * $w_step}] \
+    pad_reset
 
-for {set i 0} {$i < $n_right} {incr i} {
-    set y [expr {$rowMin + ($i+1)*$pitch_right}]
-    place_pad -master sg13g2_IOPadOut16mA \
-        -row IO_EAST \
-        -location $y \
-        [lindex $right_outputs $i]
-}
-set top_pads {
-    pad_vdd0 pad_vss0
-    pad_vdd1 pad_vss1
-    pad_vddio0 pad_vssio0
-    pad_vddio1 pad_vssio1
-}
 
-set n_top [llength $top_pads]
-set pitch_top [expr {($chipW - 360)/($n_top + 1)}]
+# =========================================================
+# 4. SOUTH SIDE (Outputs arr0 & arr1) - 8 Pins
+# =========================================================
+set s_count 8
+set s_step  [expr {$span / ($s_count + 1)}]
 
-for {set i 0} {$i < $n_top} {incr i} {
-    set x [expr {180 + ($i+1)*$pitch_top}]
-    place_pad -master [expr {[string match *vdd* [lindex $top_pads $i]] ? "sg13g2_IOPadIOVdd" : "sg13g2_IOPadIOVss"}] \
-        -row IO_NORTH \
-        -location $x \
-        [lindex $top_pads $i]
-}
+# arr0 Group
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 1 * $s_step}] pad_arr0_0
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 2 * $s_step}] pad_arr0_1
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 3 * $s_step}] pad_arr0_2
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 4 * $s_step}] pad_arr0_3
 
+# arr1 Group
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 5 * $s_step}] pad_arr1_0
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 6 * $s_step}] pad_arr1_1
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 7 * $s_step}] pad_arr1_2
+place_pad -master sg13g2_IOPadOut16mA -row IO_SOUTH -location [expr {$min_pos + 8 * $s_step}] pad_arr1_3
+
+
+# =========================================================
+# 5. EAST SIDE (Outputs arr2 & arr3) - 8 Pins
+# =========================================================
+set e_count 8
+set e_step  [expr {$span / ($e_count + 1)}]
+
+# arr2 Group
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 1 * $e_step}] pad_arr2_0
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 2 * $e_step}] pad_arr2_1
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 3 * $e_step}] pad_arr2_2
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 4 * $e_step}] pad_arr2_3
+
+# arr3 Group
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 5 * $e_step}] pad_arr3_0
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 6 * $e_step}] pad_arr3_1
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 7 * $e_step}] pad_arr3_2
+place_pad -master sg13g2_IOPadOut16mA -row IO_EAST -location [expr {$min_pos + 8 * $e_step}] pad_arr3_3
+
+
+# =========================================================
+# 6. NORTH SIDE (Power Supply) - 8 Pins
+# =========================================================
+set n_count 8
+set n_step  [expr {$span / ($n_count + 1)}]
+
+# Pair 1: Core Power (VDD0/VSS0)
+place_pad -master sg13g2_IOPadVdd -row IO_NORTH -location [expr {$min_pos + 1 * $n_step}] pad_vdd0
+place_pad -master sg13g2_IOPadVss -row IO_NORTH -location [expr {$min_pos + 2 * $n_step}] pad_vss0
+
+# Pair 2: Core Power (VDD1/VSS1)
+place_pad -master sg13g2_IOPadVdd -row IO_NORTH -location [expr {$min_pos + 3 * $n_step}] pad_vdd1
+place_pad -master sg13g2_IOPadVss -row IO_NORTH -location [expr {$min_pos + 4 * $n_step}] pad_vss1
+
+# Pair 3: IO Power (VDDIO0/VSSIO0)
+place_pad -master sg13g2_IOPadIOVdd -row IO_NORTH -location [expr {$min_pos + 5 * $n_step}] pad_vddio0
+place_pad -master sg13g2_IOPadIOVss -row IO_NORTH -location [expr {$min_pos + 6 * $n_step}] pad_vssio0
+
+# Pair 4: IO Power (VDDIO1/VSSIO1)
+place_pad -master sg13g2_IOPadIOVdd -row IO_NORTH -location [expr {$min_pos + 7 * $n_step}] pad_vddio1
+place_pad -master sg13g2_IOPadIOVss -row IO_NORTH -location [expr {$min_pos + 8 * $n_step}] pad_vssio1
+
+
+# =========================================================
+# 7. Finalize
+# =========================================================
 place_corners sg13g2_Corner
+
 set fillers {
     sg13g2_Filler10000
     sg13g2_Filler4000
@@ -84,15 +123,12 @@ set fillers {
     sg13g2_Filler400
     sg13g2_Filler200
 }
-
 place_io_fill -row IO_NORTH {*}$fillers
 place_io_fill -row IO_SOUTH {*}$fillers
 place_io_fill -row IO_EAST  {*}$fillers
 place_io_fill -row IO_WEST  {*}$fillers
+
 connect_by_abutment
 remove_io_rows
 
-puts "\n✅ IO / Pad Placement Completed Successfully\n"
-
-
-
+puts "\n✅ Elastic Pad Placement Done (Size: $die_size)\n"
